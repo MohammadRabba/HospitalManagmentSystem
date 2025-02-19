@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-namespace Hospital
+namespace HospitalManagmentSystem.Entities
 {
     public class MyDBContext:DbContext
     {
@@ -18,10 +18,12 @@ namespace Hospital
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=RABBA3;Initial Catalog=HospitalSystem;Integrated Security=True;Encrypt=False");
+            optionsBuilder.UseSqlServer(@"Data Source=RABBA3;Initial Catalog=HospitalManagment;Integrated Security=True;Encrypt=False");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+           
+
             modelBuilder.Entity<Bill>()
                 .Property(b => b.BillPrice)
                 .HasPrecision(18, 2);
@@ -29,6 +31,19 @@ namespace Hospital
             modelBuilder.Entity<Medication>()
                 .Property(m => m.MedicationAmount)
                 .HasPrecision(18, 2);
+
+            modelBuilder.Entity<MedicationPrespection>()
+             .HasKey(mp => new { mp.PrespectionId, mp.medicationId });
+
+            modelBuilder.Entity<MedicationPrespection>()
+                .HasOne(mp => mp.prescription)
+                .WithMany(p => p.medicationPrespections)
+                .HasForeignKey(mp => mp.PrespectionId);
+
+            modelBuilder.Entity<MedicationPrespection>()
+                .HasOne(mp => mp.medication)
+                .WithMany(m => m.medicationPrespections)
+                .HasForeignKey(mp => mp.medicationId);
         }
         }
 }

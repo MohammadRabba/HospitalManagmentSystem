@@ -5,7 +5,7 @@ using System.Net.Cache;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hospital
+namespace HospitalManagmentSystem.Entities
 {
     public class Person
     {
@@ -20,9 +20,9 @@ namespace Hospital
         {
             this.Name = Name;
             this.Age = Age;
-            this.Gender = gender;
+            Gender = gender;
             this.ContactNumber = ContactNumber;
-            this.Address = address;
+            Address = address;
         }
     }
 }

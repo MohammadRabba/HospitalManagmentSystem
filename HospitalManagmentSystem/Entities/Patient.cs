@@ -5,7 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hospital
+namespace HospitalManagmentSystem.Entities
 {
     public class Patient : Person
     {
@@ -15,12 +15,12 @@ namespace Hospital
 
         public Patient(string name,int age,string gender,string ContactNumber, string address) :  base(name, age, gender, ContactNumber,address) 
         {
-            this.Name = name;
-            this.Age = age;
-            this.Gender = gender;
+            Name = name;
+            Age = age;
+            Gender = gender;
             this.ContactNumber = ContactNumber;
-            
-            this.Address = address;
+
+            Address = address;
 
         }
     }

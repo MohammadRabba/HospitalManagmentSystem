@@ -1,15 +1,18 @@
-﻿using System;
+﻿using Hospital;
+using HospitalManagmentSystem.Entities;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hospital
+namespace HospitalManagmentSystem.EntityManagmenet
 {
     class PatientManagement
     {
-        public static void showOptions(MyDBContext context)
+        public PatientLogic patientLogic = new PatientLogic();
+        public  void showOptions()
         {
             while (true)
             {
@@ -28,20 +31,20 @@ namespace Hospital
                 switch (choice2)
                 {
                     case "1":
-                        AddPatient(context);
+                        AddPatient();
                         break;
                     case "2":
-                        GetPatient(context);
+                        GetPatient();
 
                         break;
                     case "3":
-                        UpdatePatient(context);
+                        UpdatePatient();
                         break;
                     case "4":
-                        RemovePatient(context);
+                        RemovePatient();
                         break;
                     case "5":
-                        GetAllPatient(context);
+                        GetAllPatient();
                         break;
                     case "6":
                         return;
@@ -51,81 +54,57 @@ namespace Hospital
                 }
             }
         }
-        public static void GetAllPatient(MyDBContext context)
+        public  void GetAllPatient()
 
 
-        { 
-            var patients = context.Patients.ToList();
-            foreach (var patient in patients) {
-                Console.WriteLine($"PatientID is {patient.Id} Name: {patient.Name} Age: {patient.Age} Gender: {patient.Id} Address: {patient.Address} ContcatNumber: {patient.ContactNumber}.");
-            }
+        {
+            patientLogic.GetAllPatient();
         }
-        public static void GetPatient(MyDBContext context)
+        public  void GetPatient()
 
 
         {
             Console.WriteLine("Please Enter The Id For Patient");
-            var patId = Console.ReadLine();
-            if (patId != null)
-            {
-                var patient = context.Patients.Where(x => x.Id == int.Parse(
-                patId));
-                Console.WriteLine($"PatientID is {context.Patients.First().Id} Name: {context.Patients.First().Name} Age: {context.Patients.First().Age} Gender: {context.Patients.First().Id} Address: {context.Patients.First().Address} ContcatNumber: {context.Patients.First().ContactNumber}.");
-            }
-            else
-            {
-                Console.WriteLine("Invalid Id");
-            }
+            var patId = int.Parse(Console.ReadLine());
+            patientLogic.GetPatient(patId);
         }
-        public static void UpdatePatient(MyDBContext context)
+        public  void UpdatePatient()
         {
 
             {
                 Console.Write("Enter patient Id: ");
-                var PatientId=Console.ReadLine();
-                var patient = context.Patients.FirstOrDefault(x => x.Id == int.Parse(
-               PatientId));
+                var PatientId=int.Parse(Console.ReadLine());
+               
                 Console.Write("Enter patient name: ");
                 var name = Console.ReadLine();
-                patient.Name = name;
                 Console.Write("Enter patient age: ");
                 var age = int.Parse(Console.ReadLine());
-                patient.Age = age;
                 Console.Write("Enter patient gender: ");
                 var gender = Console.ReadLine();
-                patient.Gender = gender;
                 Console.Write("Enter contact number: ");
                 var contactNumber = Console.ReadLine();
-                patient.ContactNumber = contactNumber;
                 Console.Write("Enter address: ");
                 var address = Console.ReadLine();
-                patient.Address = address;
+                var pat = new Patient(
+                    name, age, gender, contactNumber, address);
+                pat.Id = PatientId;
+                patientLogic.UpdatePatient(pat);
 
-                context.SaveChanges();
-                Console.WriteLine("Patient Updated successfully.");
             }
         }
 
 
-        public static void RemovePatient(MyDBContext context)
+        public  void RemovePatient()
         {
 
             {
                 Console.Write("Enter patient Id: ");
-                var patId = Console.ReadLine();
-                
-                    var patient = context.Patients.FirstOrDefault
-                        (x => x.Id == int.Parse(
-               patId));
-                if (patient != null)
-                {
-                    context.Patients.Remove(patient);
-                    context.SaveChanges();
-                    Console.WriteLine("Patient Removed successfully.");
-                }
+                var patId = int.Parse(Console.ReadLine());
+
+                patientLogic.RemovePatient(patId);
             }
         }
-        public static void AddPatient(MyDBContext context)
+        public  void AddPatient()
         {
             
             {
@@ -149,9 +128,7 @@ namespace Hospital
                      address
                 );
 
-                context.Patients.Add(patient);
-                context.SaveChanges();
-                Console.WriteLine("Patient added successfully.");
+                patientLogic.AddPatient(patient);
             }
         }
     }

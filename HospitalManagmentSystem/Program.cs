@@ -1,4 +1,5 @@
-﻿using Hospital;
+﻿using HospitalManagmentSystem.Entities;
+using HospitalManagmentSystem.EntityManagmenet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,22 +27,28 @@ class Program
             switch (choice)
             {
                 case "1":
-                    PatientManagement.showOptions(context);
+                    PatientManagement patientManagement = new PatientManagement();
+                    patientManagement.showOptions();
                     break;
                 case "2":
-                    DoctorManagement.showOptions(context);
+                    DoctorManagement doctorManagement = new DoctorManagement();
+                    doctorManagement.showOptions();
                     break;
                 case "3":
-                    AppointmentManagement.showOptions(context);
+                    AppointmentManagement appointmentManagement = new AppointmentManagement();
+                    appointmentManagement.showOptions();
                     break;
                 case "4":
-                    PrescriptionManagement.showOptions(context);
+                    PrescriptionManagement prescriptionManagement = new PrescriptionManagement();
+                    prescriptionManagement.showOptions();
                     break;
                 case "5":
-                    MedicationManagement.showOptions(context);
+                    MedicationManagement medicationManagement = new MedicationManagement();
+                    medicationManagement.showOptions();
                     break;
                 case "6":
-                    BillingManagement.showOptions(context);
+                    BillingManagement billingManagement = new BillingManagement();
+                    billingManagement.showOptions();
                     break;
                 case "7":
                     return;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hospital
+namespace HospitalManagmentSystem.Entities
 {
     public class Doctor:Person
     {public string Email { get;set;}
@@ -14,13 +14,13 @@ namespace Hospital
         public List<Appointment> Appointment{ get; set; }
         public Doctor(string name, int age, string gender, string ContactNumber, string Email,string specify,string address) : base(name, age, gender, ContactNumber, address)
         {
-            this.Name = name;
-            this.Age = age;
-            this.Gender = gender;
+            Name = name;
+            Age = age;
+            Gender = gender;
             this.ContactNumber = ContactNumber;
             this.Email = Email;
-            this.Specify = specify;
-            this.Address = address;
+            Specify = specify;
+            Address = address;
         }
 
     }

@@ -5,28 +5,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hospital
+namespace HospitalManagmentSystem.Entities
 {
-    [PrimaryKey("PrespectionId", "MedicationId")]
     public class MedicationPrespection
     {
+        
+
 
         public int PrespectionId;
         public Prescription prescription;
-        public int MedicationId;
         public Medication medication;
+        public int medicationId;
         public int BillsId;
         public Bill bill;
         public MedicationPrespection()
         {
         }
-        public MedicationPrespection(int prespectionId, Prescription prescription, int medicationId, Medication medication, int billsId, Bill bill)
+        public MedicationPrespection(int prespectionId, Prescription prescription, int medicationId,Medication medication, int billsId, Bill bill)
         {
-            this.PrespectionId = prespectionId;
+            PrespectionId = prespectionId;
             this.prescription = prescription;
-            MedicationId = medicationId;
             this.medication = medication;
-            BillsId = billsId;
+            this.medicationId = medicationId;
+            this.BillsId = billsId;
             this.bill = bill;
             
         }

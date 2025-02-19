@@ -38,7 +38,7 @@ namespace HospitalManagmentSystem.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MedicationName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MedicationQuantity = table.Column<int>(type: "int", nullable: false),
-                    MedicationAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    MedicationAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -126,7 +126,7 @@ namespace HospitalManagmentSystem.Migrations
                     Status = table.Column<int>(type: "int", nullable: false),
                     PrescriptionId = table.Column<int>(type: "int", nullable: false),
                     BillDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BillPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    BillPrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -144,23 +144,24 @@ namespace HospitalManagmentSystem.Migrations
                 columns: table => new
                 {
                     PrespectionId = table.Column<int>(type: "int", nullable: false),
-                    MedicationId = table.Column<int>(type: "int", nullable: false),
-                    PrescriptionId = table.Column<int>(type: "int", nullable: true)
+                    medicationId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MedicationPrespections", x => new { x.PrespectionId, x.MedicationId });
+                    table.PrimaryKey("PK_MedicationPrespections", x => new { x.PrespectionId, x.medicationId });
                     table.ForeignKey(
-                        name: "FK_MedicationPrespections_Medications_MedicationId",
-                        column: x => x.MedicationId,
+                        name: "FK_MedicationPrespections_Medications_medicationId",
+                        column: x => x.medicationId,
                         principalTable: "Medications",
                         principalColumn: "MedicationId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MedicationPrespections_Prescriptions_PrescriptionId",
-                        column: x => x.PrescriptionId,
+                        name: "FK_MedicationPrespections_Prescriptions_PrespectionId",
+                        column: x => x.PrespectionId,
                         principalTable: "Prescriptions",
-                        principalColumn: "PrescriptionId");
+                        principalColumn: "PrescriptionId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -179,14 +180,9 @@ namespace HospitalManagmentSystem.Migrations
                 column: "PrescriptionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MedicationPrespections_MedicationId",
+                name: "IX_MedicationPrespections_medicationId",
                 table: "MedicationPrespections",
-                column: "MedicationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MedicationPrespections_PrescriptionId",
-                table: "MedicationPrespections",
-                column: "PrescriptionId");
+                column: "medicationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Prescriptions_DoctorId",

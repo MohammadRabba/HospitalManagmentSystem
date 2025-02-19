@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hospital
+namespace HospitalManagmentSystem.Entities
 {
     public class Bill
     {
         public enum BillStatus
         {
-            Paid, Unpaid
+            Unpaid,Paid, 
 
         }
         public int BillId {  get; set; }
@@ -18,7 +18,8 @@ namespace Hospital
             public int PrescriptionId { get; set; }
         public Prescription prescription { get; set; }
         public DateTime BillDate {  get; set; }
-        public decimal BillPrice { get; set; } = 0;
+        public decimal BillPrice { get; set; } 
+
         public Bill()
         {
         }
@@ -29,6 +30,7 @@ namespace Hospital
             PrescriptionId = prescriptionId;
             BillDate = DateTime.Now;
             this.prescription = prescription;
+            BillPrice = 0;
             
             }
         }

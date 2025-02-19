@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hospital
+namespace HospitalManagmentSystem.Entities
 {
     public class Medication
     {
@@ -12,7 +12,7 @@ namespace Hospital
         public string MedicationName { get; set; }
         public int MedicationQuantity { get; set; }
         public decimal MedicationAmount { get; set; }
-        public virtual ICollection<MedicationPrespection> medicationPrespections { get; set; } = new List<MedicationPrespection>();
+        public virtual List<MedicationPrespection> medicationPrespections { get; set; } 
 
         public Medication() { }
         public Medication( string medicationName, int medicationQuantity, decimal medicationAmount)

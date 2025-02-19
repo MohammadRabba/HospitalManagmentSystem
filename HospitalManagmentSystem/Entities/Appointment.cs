@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hospital
+namespace HospitalManagmentSystem.Entities
 {
     public class Appointment
     {
@@ -23,12 +23,18 @@ namespace Hospital
         public Doctor doctor;
         public Appointment() { }
 
-        public Appointment(int PatientId, int DoctorId,DateTime appoitmentDate)
+        public Appointment(int PatientId, int DoctorId,DateTime appoitmentDate, AppointmentStatus status)
         {
             this.PatientId = PatientId;
             AppoitmentDate = appoitmentDate;
             this.DoctorId = DoctorId;
-            Status = AppointmentStatus.Scheduled;
+            this.Status = status;
+        }
+        public Appointment(int PatientId, int DoctorId, DateTime appoitmentDate)
+        {
+            this.PatientId = PatientId;
+            AppoitmentDate = appoitmentDate;
+            this.DoctorId = DoctorId;
         }
     }
 }

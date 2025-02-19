@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hospital
+namespace HospitalManagmentSystem.Entities
 {
     public class Prescription
     {
@@ -13,7 +13,7 @@ namespace Hospital
         public Patient patient;
         public int DoctorId { get; set; }
         public Doctor doctor;
-        public virtual ICollection<MedicationPrespection> medicationPrespections { get; set; } = new List<MedicationPrespection>();
+        public   List<MedicationPrespection>medicationPrespections { get; set; }
 
         public DateTime PrescriptionDate { set; get; }
 
@@ -22,6 +22,12 @@ namespace Hospital
             this.PatientId = PatientId;
             this.DoctorId = DoctorId;
             this.patient = patient;this.doctor = doctor;
+            PrescriptionDate = DateTime.Now;
+        }
+        public Prescription(int PatientId, int DoctorId)
+        {
+            this.PatientId = PatientId;
+            this.DoctorId = DoctorId;
             PrescriptionDate = DateTime.Now;
         }
         public Prescription()
